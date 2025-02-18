@@ -1,7 +1,7 @@
-const { ModuleFederationPlugin } = require('webpack').container;
+const { ModuleFederationPlugin } = require("webpack").container;
 
 module.exports = {
-  mode: process.env.NODE_ENV !== 'production' ? 'development' : 'production',
+  mode: process.env.NODE_ENV !== "production" ? "development" : "production",
   devServer: (devServerConfig) => {
     devServerConfig.setupMiddlewares = (middlewares) => middlewares;
     delete devServerConfig.onBeforeSetupMiddleware;
@@ -13,30 +13,30 @@ module.exports = {
     sass: {
       loaderOptions: {
         sassOptions: {
-          silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin']
-        }
-      }
-    }
+          silenceDeprecations: ["legacy-js-api", "import", "global-builtin"],
+        },
+      },
+    },
   },
   webpack: {
     plugins: {
       add: [
         new ModuleFederationPlugin({
-          name: 'starfleetPluginReactTemplate',
-          filename: 'remoteEntry.js',
-          library: { type: 'var', name: 'starfleetPluginReactTemplate' },
+          name: process.env.REACT_APP_NAME,
+          filename: "remoteEntry.js",
+          library: { type: "var", name: process.env.REACT_APP_NAME },
           exposes: {
-            '.': './src/injector'
-          }
-        })
-      ]
+            ".": "./src/injector",
+          },
+        }),
+      ],
     },
     configure: (webpackConfig) => ({
       ...webpackConfig,
       output: {
         ...webpackConfig.output,
-        publicPath: 'auto'
-      }
-    })
-  }
+        publicPath: "auto",
+      },
+    }),
+  },
 };
