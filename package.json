@@ -26,12 +26,6 @@
     "eject": "craco eject",
     "dev": "craco build && node server/index.js"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
